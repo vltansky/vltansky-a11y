@@ -38,6 +38,8 @@ css: unocss
 - WAI - Web Accessibility Initiative (1997) <br />
   by W3C & The White House
 - WCAG - Web Content Accessibility Guidelines (December 2008)
+- SR - Screen reader
+- AT - Assistive technology - Any item, piece of equipment, or product system that is used to increase, maintain, or improve functional capabilities of individuals with disabilities
 
 ---
 
@@ -48,6 +50,8 @@ WCAG 2.0 guidelines are categorized into three levels of conformance: A (lowest)
 https://en.wikipedia.org/wiki/Web_Content_Accessibility_Guidelines#Version_2 <br/>
 https://www.w3.org/TR/WCAG22 <br/>
 https://www.w3c.org.il/guidelines_wcag_2-0 <br/>
+https://uxdesign.cc/wcag-3-0-what-you-need-to-know-about-the-future-of-accessibility-standards-2e1f6374f2c7
+
 
 ---
 
@@ -107,416 +111,242 @@ Captions are required for time-based media (Level A) uploaded after 2017. Howeve
 <br/><br/>
 Small businesses may be granted an exemption, limited to 3 years. Exemptions may also be granted to any service, if the accommodations are technically impossible. The regulations are enforced both administratively, by the Commission on Equal Rights for Persons with Disabilities – a government agency – and through civil legal proceedings.
 
+---
+
 # How to use A11y software
 
 Softwares:
 
 - Jaws
 - NVDA
-- VoiceOver
+- VoiceOver [keys](https://help.apple.com/voiceover/command-charts/)
 
-_Dom order focus_
+https://www.tpgi.com/basic-screen-reader-commands-for-accessibility-testing/
+
+Arrow keys - navigate
+Tab key - jump to next focusable element (element should trigger smth, not just read)
+
 
 ---
 
 # Semantic HTML5 and layout wai aria
+<div class="text-center">
+  <img src="/imgs/semantic-twit.jpg" class="inline h-[280px]" />
+  <img src="/imgs/non-semantic.png" class="inline h-[280px]" />
+</div>
 
-- `<header />`
-- `<main />`
-- `<footer />`
-- `<aside />`
-
----
-
-# Lets get practical
+https://www.semrush.com/blog/semantic-html5-guide/
 
 ---
 
-# TabIndex
+
+# Focus
+
+### `:focus` & `:focus-visible`
+
+https://hidde.blog/focus-visible-more-than-keyboard/#:~:text=In%20other%20words%2C%20focus%20styles,to%20highlight%20it%20or%20not.
+
+### Focus trap
+
+https://appnest-demo.firebaseapp.com/focus-trap/
+
+## Styling focus
+
+https://tailwindcss.com/docs/hover-focus-and-other-states#hover-focus-and-active
+
+
+### Autofocus
+
+
+
+---
+
+# TabIndex & ESlint
 
 tabindex = 0 | -1 | 1,2,3...
 
-```jsx
-<div onClick={() => alert("click!")}>Example</div>
-```
+🚫 Not accessible
 
-```jsx
-<div tabIndex={0} onKeyPress={} onClick={()=>alert('click!')}>Example</div>
+  <img src="/imgs/a11y-eslint-onclick.png" class="inline h-[150px]" />
+
+✅ Good
+
+```jsx{all|2|3-4}
+<div
+  tabIndex={0}
+  onKeyDown={(e)=>e.keyCode === 13 && alert('a')}
+  onClick={()=>alert('a')}
+  >
+  test
+</div>
 ```
+* `onKeyPress` deprecated -  use `onKeyDown`,
 
 ---
 
 # Buttons
 
+Always prefer `<button>` over divs, spans etc. Button by default handles space and enter keypress.
+
 - `<div role="button" />`
-- `<button>` types = submit | button | empty
+- `<button>` types = submit (default) | button | reset
+- `<input type="button">`
+
+
+```jsx{3|2-3|4}
+<div 
+  tabindex="0" 
+  role="button" 
+  aria-pressed="false"
+  >
+  Save
+</div>
+```
+
+---
+
+# Navigation
+
+```html{all|1,10|2,9|3,5|4}
+<nav aria-label="Main">
+   <ul>
+      <li>
+        <a href="/about.xhtml">About</a>
+      </li>
+      <li><a href="/news.asp">News</a></li>
+      <li><a href="/register.cfm">Register</a></li>
+      […]
+   </ul>
+</nav>
+```
+
+or use aria:
+```html
+<div role="navigation" aria-label="Main">
+  <!-- list of links to main website locations -->
+</div>
+```
+
+## role=menu|menubar|menuitem are desktop menus
+https://adrianroselli.com/2017/10/dont-use-aria-menu-roles-for-site-nav.html
+
+
+---
+
+# Dropdowns
+
+https://adrianroselli.com/2020/03/stop-using-drop-down.html
+
+---
+
+# Images
+### svg
+
+```html
+<svg>
+  <title>Qr code</title>
+</svg>
+```
+
+```html
+<svg aria-label="Qr code">
+  ...
+</svg>
+```
+<br />
+
+### img - use `alt`. If image not informative - leave empty alt. 
+
+```html
+<img src=".." alt="" />
+```
+<br />
+
+### font icons
+
+```html
+<span class="fa-solid fa-envelope" aria-hidden="true"></span>
+<span class="fa-solid fa-envelope" aria-label="explanation"></span>
+```
+
+---
+
+# Hiding elements
+
+- `aria-hidden="true"`
+- `role="presentation"` same as `role="none"`
+
+seem similar, but the intent behind each is different.
+
+aria-hidden="true" will remove the entire element from the accessibility API.
+role="presentation" and role="none" will remove the semantic meaning of an element while still exposing it and its content to assistive technology.
+
+The HTML hidden attribute is present
+The element or the element's ancestor is hidden with display: none
+The element or the element's ancestor is hidden with visibility: hidden
+In all three scenarios, the attribute is unnecessary to add because the element has already been removed from the accessibility tree. Visually hiding elements with display or visibility hides content from the screen and from assistive technologies.
+
+Using aria-hidden="false" will not re-expose the element to assistive technology if any of its parents specify aria-hidden="true".
+
+https://www.digitala11y.com/presentation-role/ (Example 4)
+---
+
+# Showing elements only for screen readers
+
+```css
+.sr-only {
+  position: absolute;
+width: 1px;
+height: 1px;
+padding: 0;
+margin: -1px;
+overflow: hidden;
+clip: rect(0, 0, 0, 0);
+white-space: nowrap;
+border-width: 0;
+}
+```
+
+* sr = screen reader
+
+https://tailwindcss.com/docs/screen-readers
+
 
 ---
 
 # Devtools
 
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
 ---
 
-## transition: fade-out
-
-# What is Slidev?
-
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
-
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!--
-Here is another comment.
--->
-
+# aria-live region + aria busy
+---
+# Table structure + a bit about our Table component
+---
+# Error (role=“alert” + aria-describedby)
+---
+# Label -> for or wrap
+---
+# useId react + id should be unique
+---
+# Whisper + trigger cant be div!
+---
+# role=“slider” example
+---
+# tabpanel + accordions
+---
+# Checkbox
+---
+# Radio
+---
+# Input
+---
+# Autocomplete
 ---
 
-## transition: slide-up
-
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-### Keyboard Shortcuts
-
-|                                                    |                             |
-| -------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                | next animation or slide     |
-| <kbd>left</kbd> / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                      | previous slide              |
-| <kbd>down</kbd>                                    | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
+https://github.com/alphagov/accessible-autocomplete
+# Motion disabled
 ---
 
-layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
+# Useful links
 
----
-
-# Code
-
-Use code snippets and get the highlighting directly![^1]
-
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  role: string;
-}
-
-function updateUser(id: number, update: User) {
-  const user = getUser(id);
-  const newUser = { ...user, ...update };
-  saveUser(id, newUser);
-}
-```
-
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
-
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
-
-<style>
-.footnotes-sep {
-  @apply mt-20 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-
-## class: px-20
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-
-## preload: false
-
-# Animations
-
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
-
-```html
-<div v-motion :initial="{ x: -80 }" :enter="{ x: 0 }">Slidev</div>
-```
-
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
-<br>
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-
-$$
-\begin{array}{c}
-
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-3 gap-10 pt-4 -mb-6">
-
-```mermaid {scale: 0.5}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
-
----
-
-src: ./pages/multiple-entries.md
-hide: false
-
----
-
----
-
-layout: center
-class: text-center
-
----
-
-# Learn More
-
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/
