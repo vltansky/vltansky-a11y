@@ -23,7 +23,7 @@ css: unocss
 ---
 
 # 
-<div class="bg-[url(/imgs/a11y-bg.png)] h-[100vh] w-full bg-contain fixed left-0 top-0" style="background-image: url(/imgs/a11y-bg.png)" />
+<div class="bg-[url(/imgs/a11y-bg.png)] h-[100vh] w-full bg-contain fixed left-0 top-0" />
 <div class="text-white bottom-8 absolute">“ a11y ” stands for “accessibility.” It is a numeronym, with 11 representing the count of letters between the letter a and the letter y. Other numeronyms you may be familiar with include: i18n (internationalization)</div>
 
 
