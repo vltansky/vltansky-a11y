@@ -634,7 +634,17 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
-# aria-posinset & aria-setsize
+# form validation
+
+
+```html
+<label for="email">Your email</label>
+<input type="text" id="email" aria-invalid="true" aria-describedby="emailHint emailError">
+<p id="emailHint">gmail is forbidden</p>
+<p id="emailError" role="alert">Invalid email address.</p>
+```
+https://www.w3.org/WAI/tutorials/forms/
+
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -750,6 +760,48 @@ The aria-haspopup attribute indicates the availability and type of interactive p
 <ul id="menu-id" role="menu" aria-hidden="true">...</ul>
 ```
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+
+# aria-live
+Dynamic content which updates without a page reload is generally either a region or a widget. Simple content changes which are not interactive should be marked as live regions. A live region is explicitly denoted using the aria-live attribute.
+
+
+aria-live="assertive" == role="alert"
+most of the time we will use aria-live="polite". The screen reader will speak changes whenever the user is idle
+
+https://bitsofco.de/using-aria-live/
+https://codepen.io/joe-watkins/pen/NWOxov
+
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+
+# aria-atomic
+
+As an illustration of aria-atomic, consider a site with a simple clock, showing hours and minutes. The clock is updated each minute, with the new remaining time overwriting the current content
+```html
+<div id="clock" role="timer" aria-live="polite" aria-atomic="true">…</div>
+```
+aria-atomic="true" ensures that each time the live region is updated, the entirety of the content is announced in full (e.g. "17:34").
+
+Another example of aria-atomic - an update/notification made as a result of a user action
+
+```jsx
+<div id="date-input">
+  <label for="year">Year:</label>
+  <input type="text" id="year" value="1990" onBlur={(e)=>setYear(event.target.value)} />
+</div>
+
+<div id="date-output" aria-atomic="true" aria-live="polite">
+  The set year is:
+  <span id="year-output">{year}</span>
+</div>
+```
+
+https://codepen.io/fstorr/full/rxbZyG
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
