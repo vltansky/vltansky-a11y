@@ -1005,12 +1005,143 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 https://www.magentaa11y.com/checklist-web/select/
 https://github.com/alphagov/accessible-autocomplete
 
-# Motion disabled
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+
+# Basic table
+
+
+<table>
+<caption>Monthly Budget</caption>
+  <thead>
+    <tr>
+      <th scope="col">Month</th>
+      <th scope="col">Amount Earned</th>
+      <th scope="col">Amount Spent</th>
+			<th scope="col">Amount Saved</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+			<th scope="row">January</th>
+			<td>$2500</td>
+			<td>$1500</td>
+			<td>$500</td>
+    </tr>
+		<tr>
+			<th scope="row">February</th>
+			<td>$2700</td>
+			<td>$1500</td>
+			<td>$700</td>
+		</tr>
+  </tbody>
+</table>
+
+https://www.w3.org/WAI/tutorials/tables/
+
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+# Basic table
+
+```html
+<table>
+<caption>Monthly Budget</caption>
+  <thead>
+    <tr>
+      <th scope="col">Month</th>
+      <th scope="col">Amount Earned</th>
+      <th scope="col">Amount Spent</th>
+      <th scope="col">Amount Saved</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">January</th>
+      <td>$2500</td>
+      <td>$1500</td>
+      <td>$500</td>
+    </tr>
+    <tr>
+      <th scope="row">February</th>
+      <td>$2700</td>
+      <td>$1500</td>
+      <td>$700</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+# Basic table
+
+```html
+<div role="table" aria-label="Monthly Budget"> <!-- <table> -->
+  <div role="rowgroup">
+    <div role="row">
+      <div role="columnheader">Month</div>
+      <div role="columnheader">Amount Earned</div>
+      <div role="columnheader">Amount Spent</div>
+      <div role="columnheader">Amount Saved</div>
+    </div>
+    <div role="row">
+      <div role="rowheader">January</div>
+      <div role="cell">$2500</div>
+      <div role="cell">$1500</div>
+      <div role="cell">$500</div>
+    </div>
+    <div role="row">
+      <div role="rowheader">February</div>
+      <div role="cell">$2700</div>
+      <div role="cell">$1500</div>
+      <div role="cell">$700</div>
+    </div>
+  </div>
+</div>
+```
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+
+# Reduced motion
+<div class="text-center">
+  <img src="/imgs/reduced-motion.png" class="inline mb-2 h-[200px]" />
+</div>
+
+```css
+@media screen and (prefers-reduced-motion: reduce) {
+   .theheart, .firststrokes {
+       animation: none;
+   }
+   .secondstrokes, .explode, .explode2 {
+       display: none;
+   }
+}
+```
+
+https://youtu.be/-7ENwVFOh_I
+
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # Devtools 
+
+- [Lighthouse](https://developer.chrome.com/docs/devtools/accessibility/reference/)
+- [aXe extension](https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd) 
+- Accessibility panel in chrome devtools (+ experimental full-page accessibility tree)
+- [Contrast check](https://developer.chrome.com/docs/devtools/accessibility/contrast/)
+- Rendering: emulate vision deficiencies, reduced motion, prefer contrast, dark mode and etc.
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+
 # Useful links
 
 https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/
