@@ -158,6 +158,25 @@ https://www.semrush.com/blog/semantic-html5-guide/
 The difference between semantic and non-semantic tags may not seem important to sighted users, but it matters considerably to blind users for many reasons. In this example, the
 tag informs the screen reader of a major set of navigation links. Semantic elements come with their own keyboard accessibility built-in, so no extra work is required on the user’s part.If you want to know which HTML element to use for each situation. [List of all elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
 
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+
+# Roles
+
+ARIA roles provide semantic meaning to content.
+
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles
+
+Types:
+- Document structure roles (toolbar, tooltip, none, cell, group, heading)
+- Widgets (searchbox, slider, switch, menu, tabpanel, combobox)
+- Landmark roles (banner, contentinfo, complementary, search)
+- Live region (alert, log, status)
+- Window (dialog, alertdialog)
+
+
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -238,8 +257,9 @@ Always prefer `<button>` over divs, spans etc. Button by default handles space a
 <div 
   tabindex="0" 
   role="button" 
+  aria-disabled="true"
   aria-pressed="false">
-  Save
+  Toggle
 </div>
 ```
 
@@ -693,7 +713,43 @@ For example, when using Tabs, we should mark the currently selected tab with ari
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
-# aria-posinset & aria-setsize
+# aria-expanded
+
+The aria-expanded attribute is set on an element to indicate if a control is expanded or collapsed, and whether or not its child elements are displayed or hidden
+
+```jsx
+<button
+  aria-expanded="false"
+  aria-controls="username-desc"
+  aria-label="Help about username"
+  onClick={()=>setOpen(val=>!val)}
+  type="button">
+  <span aria-hidden="true">?</span>
+</button>
+
+<p id="username-desc" hidden={open}>
+  Your username is the name that you use to log in to this service.
+</p>
+```
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+# aria-haspopup
+The aria-haspopup attribute indicates the availability and type of interactive popup element that can be triggered by the element on which the attribute is set
+
+- true == meny
+- menu
+- listbox
+- tree
+- grid
+- dialog
+
+```html
+<button aria-expanded="false" aria-haspopup="true" aria-controls="menu-id">Toggle Menu</button>     
+<ul id="menu-id" role="menu" aria-hidden="true">...</ul>
+```
+
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -709,10 +765,6 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 # Table structure + a bit about our Table component
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
-# Label -> for or wrap
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
