@@ -304,6 +304,8 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
       […]
    </ul>
 </nav>
+
+https://www.aditus.io/patterns/multiple-navigation-landmarks/
 ```
 
 or use aria:
@@ -806,56 +808,125 @@ https://codepen.io/fstorr/full/rxbZyG
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
-# Devtools
+# aria-busy
 
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
+indicates an element is being modified and that assistive technologies may want to wait until the changes are complete before informing the user about the update.
 
-# aria-live region + aria busy
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
-# Table structure + a bit about our Table component
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
-# useId react + id should be unique
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
-# Whisper + trigger cant be div!
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
-# role=“slider” example
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
-# tabpanel + accordions
+Temporarily stop updates being announced while busy:
+```html
+<ol aria-live="polite" aria-busy="true">⋯</ol>
+```
+
+Loaders:
+
+```jsx
+<div id="loader">
+  <SomeCoolLoader aria-hidden="true" />
+  <p class="sr-only">Please wait while the content is loading...</p>
+</div>
+
+<div aria-busy="true">
+  <!-- Loading content goes here -->
+</div>
+```
+
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 # Checkbox
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
-# Radio
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
-# Input
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
-# Autocomplete
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
 
+```jsx
+<label>
+  <input type="checkbox" class="sr-only" />
+  <div class="checkbox_visual" />
+  <span>Basic checkbox</span>
+</label>
+```
+
+https://play.tailwindcss.com/WNbicnwwhK
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+# Radio 
+
+```jsx
+<label>
+  <input type="radio" class="sr-only" />
+  <div class="radio_visual" />
+  <span>Basic checkbox</span>
+</label>
+```
+https://play.tailwindcss.com/fSOVuJh2E8
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+# Accordion
+
+```jsx
+function AccordionItem({ id, title, children }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  return (
+    <>
+      <h3>
+        <button
+          id={`${id}-header`}
+          aria-controls={`${id}-panel`}
+          aria-expanded={isExpanded}
+        >{title}</button>
+      </h3>
+      <section
+        id={`${id}-panel`}
+        aria-labelledby={`${id}-header`}
+        hidden={!isExpanded}
+      >{children}</section>
+    </>
+  )
+}
+// usage
+<AccordionItem id='item-1' title='Section title'><-- content goes here --></AccordionItem>
+```
+
+https://www.aditus.io/patterns/accordion/
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+# Whisper
+
+```jsx{all|3|4|4,6,2}
+<Whisper 
+  speaker={<Popover>Export data</Popover>} 
+  trigger={["hover", "focus"]} // set by default
+  controlId="export-example" // if not provided will be generated
+  >
+  <IconButton // has to be "focusable" element
+    circle
+    icon={<DownloadIcon />}
+  />
+</Whisper>
+```
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 # Dropdowns
 
+```html
+<div class="a11y-container">
+  <p id="a11y-usage-select-element-js" class="sr-only">Utilisez la tabulation (ou les touches flèches) pour naviguer dans la liste des suggestions</p>
+  <label for="a11y-select-element-js" class="sr-only">Rechercher dans la liste</label>
+  <input type="text" id="a11y-select-element-js" aria-describedby="a11y-usage-select-element-js">
+  <div id="a11y-select-element-suggestions" role="listbox" aria-multiselectable="true">
+    <div role="option" tabindex="0" data-index="0" class="a11y-suggestion">Sleeping</div>
+    <div role="option" tabindex="0" data-index="1" class="a11y-suggestion" aria-selected="true">Climbing trees</div>
+    <div role="option" tabindex="0" data-index="2" class="a11y-suggestion">Knitting socks</div>
+    <div role="option" tabindex="0" data-index="3" class="a11y-suggestion" aria-selected="true">Riding bikes</div>
+    <div role="option" tabindex="0" data-index="4" class="a11y-suggestion">Eating cupcakes</div>
+</div>
+</div>
+    ```
 https://adrianroselli.com/2020/03/stop-using-drop-down.html
+https://www.magentaa11y.com/checklist-web/select/
 
 https://github.com/alphagov/accessible-autocomplete
 # Motion disabled
@@ -863,6 +934,7 @@ https://github.com/alphagov/accessible-autocomplete
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
+# Devtools 
 # Useful links
 
 https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/
