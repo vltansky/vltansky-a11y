@@ -3,7 +3,7 @@
 theme: default
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://source.unsplash.com/9xxNZCJZ8bA/1920x1080
+# background: /imgs/a11y-bg.png
 # apply any windi css classes to the current slide
 class: "text-center"
 # https://sli.dev/custom/highlighters.html
@@ -22,14 +22,13 @@ transition: slide-left
 css: unocss
 ---
 
-# Digital Asakim A11y
+# 
+<div class="bg-[url(/imgs/a11y-bg.png)] h-[100vh] w-full bg-contain fixed left-0 top-0" style="background-image: url(/imgs/a11y-bg.png)" />
+<div class="text-white bottom-8 absolute">“ a11y ” stands for “accessibility.” It is a numeronym, with 11 representing the count of letters between the letter a and the letter y. Other numeronyms you may be familiar with include: i18n (internationalization)</div>
 
-<div class="text-center my-5">
-  <img src="/imgs/a11y-exp.png" class="inline" />
-</div>
 
-##### “ a11y ” stands for “accessibility.” It is a numeronym, with 11 representing the count of letters between the letter a and the letter y. Other numeronyms you may be familiar with include: i18n (internationalization)
-
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # Other abbreviation explanation
@@ -41,6 +40,8 @@ css: unocss
 - SR - Screen reader
 - AT - Assistive technology - Any item, piece of equipment, or product system that is used to increase, maintain, or improve functional capabilities of individuals with disabilities
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # WCAG
@@ -54,9 +55,13 @@ https://uxdesign.cc/wcag-3-0-what-you-need-to-know-about-the-future-of-accessibi
 
 
 ---
-
+layout: center
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 # WCAG 4 Principes
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # WCAG Perceivable
@@ -68,6 +73,8 @@ https://uxdesign.cc/wcag-3-0-what-you-need-to-know-about-the-future-of-accessibi
 - Create content that can be presented in different ways, including by assistive technologies, without losing meaning.
 - Make it easier for users to see and hear content.
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # WCAG Operable
@@ -81,6 +88,8 @@ https://uxdesign.cc/wcag-3-0-what-you-need-to-know-about-the-future-of-accessibi
 - Make it easier to use inputs other than keyboard.
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 
 # WCAG Understandable
@@ -92,6 +101,8 @@ https://uxdesign.cc/wcag-3-0-what-you-need-to-know-about-the-future-of-accessibi
 - Help users avoid and correct mistakes.
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # WCAG Robust
 
@@ -99,6 +110,8 @@ https://uxdesign.cc/wcag-3-0-what-you-need-to-know-about-the-future-of-accessibi
 
 - Maximize compatibility with current and future user tools.
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # WCAG in law
@@ -108,9 +121,9 @@ By Law: https://www.w3.org/WAI/policies/
 The Israeli accessibility regulations were amended in 2017 to require web accessibility in all services provided over the internet. Both private and public entities providing services online are required to apply Internet Accessibility Standard (Israel Standard 5668), which has adopted WCAG 2.0. The regulations apply to both websites, at AA level, and to applications and to digital documents uploaded after Oct 2017. Personal information – such as bank client’s statements – is to be made accessibly by 2022. Accessible websites and apps are required to include an accessibility statement.
 <br/><br/>
 Captions are required for time-based media (Level A) uploaded after 2017. However, only public authorities and large-scale private businesses have to provide them. In addition, lectures, conferences and similar events presented online, may offer a text document as alternative to online accommodations. Services provided or promoted through social media are required to use the accessibility features offered by the platforms. Websites which host third-party content have to provide accessibility options, such as alt text descriptions for images.
-<br/><br/>
-Small businesses may be granted an exemption, limited to 3 years. Exemptions may also be granted to any service, if the accommodations are technically impossible. The regulations are enforced both administratively, by the Commission on Equal Rights for Persons with Disabilities – a government agency – and through civil legal proceedings.
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # How to use A11y software
@@ -131,6 +144,8 @@ https://play.tailwindcss.com/K02GpXc3ts
 
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # Semantic HTML5 and Aria
 <div class="text-center">
@@ -141,10 +156,10 @@ https://play.tailwindcss.com/K02GpXc3ts
 https://www.semrush.com/blog/semantic-html5-guide/
 
 The difference between semantic and non-semantic tags may not seem important to sighted users, but it matters considerably to blind users for many reasons. In this example, the
-tag informs the screen reader of a major set of navigation links. Semantic elements come with their own keyboard accessibility built-in, so no extra work is required on the user’s part.If you want to know which HTML element to use for each situation
+tag informs the screen reader of a major set of navigation links. Semantic elements come with their own keyboard accessibility built-in, so no extra work is required on the user’s part.If you want to know which HTML element to use for each situation. [List of all elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
 
-https://developer.mozilla.org/en-US/docs/Web/HTML/Element
-
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # focus-visible
@@ -175,10 +190,14 @@ https://tailwindcss.com/docs/hover-focus-and-other-states#hover-focus-and-active
 ```
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # Focus trap
 https://a11y-solutions.stevenwoodson.com/solutions/focus/modals/
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # TabIndex & ESlint
@@ -203,6 +222,8 @@ tabindex = 0 | -1 | 1,2,3...
 * `onKeyPress` deprecated -  use `onKeyDown`,
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # Buttons
 
@@ -222,6 +243,8 @@ Always prefer `<button>` over divs, spans etc. Button by default handles space a
 </div>
 ```
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # Link anti-pattern
@@ -244,6 +267,8 @@ Anything that behaves like a link should use an `<a>` tag with an href, anything
   or at least use role="link" so SR will see it as a link
 </button>
 ```
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # Navigation
@@ -272,6 +297,8 @@ or use aria:
 https://adrianroselli.com/2017/10/dont-use-aria-menu-roles-for-site-nav.html
 
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # Images
@@ -305,6 +332,8 @@ https://adrianroselli.com/2017/10/dont-use-aria-menu-roles-for-site-nav.html
 ```
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # Hiding elements
 
@@ -324,6 +353,8 @@ In all three scenarios, the attribute is unnecessary to add because the element 
 Using aria-hidden="false" will not re-expose the element to assistive technology if any of its parents specify aria-hidden="true".
 
 https://www.digitala11y.com/presentation-role/ (Example 4)
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # Showing elements only for screen readers
@@ -346,6 +377,8 @@ https://tailwindcss.com/docs/screen-readers
 
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # aria-label
 
@@ -365,6 +398,8 @@ https://tailwindcss.com/docs/screen-readers
 
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # aria-label vs. title
 
@@ -380,6 +415,8 @@ In short, If you find yourself using the title attribute to provide additional i
 </a>
 ```
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # `<label>`
@@ -405,6 +442,8 @@ function Example(){
 }
 ```
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # aria-labelledby
@@ -436,6 +475,8 @@ function Example(){
 ```
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # aria-labelledby & `<label>`
 
@@ -448,6 +489,8 @@ This is much like using a label element, with some key differences
 - However, since ARIA only affects the accessibility tree, `aria-labelledby` does not give you the familiar label-clicking behavior you get from using a `label` element  
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # Relationships
 
@@ -456,6 +499,8 @@ This is much like using a label element, with some key differences
 
 The ARIA specification lists eight relationship attributes. Six of these, `aria-activedescendant`, `aria-controls`, `aria-describedby`, `aria-labelledby`, and `aria-owns`, take a reference to one or more elements to create a new link between elements on the page. The difference in each case is what that link means and how it is presented to users.
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # aria-owns
@@ -488,6 +533,8 @@ When a parent/child relationship is evident on-screen, but it isn’t represente
 ```
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # aria-controls
 
@@ -517,6 +564,8 @@ https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tablist_ro
 ```
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # aria-activedescendant
 
@@ -538,10 +587,14 @@ The aria-activedescendant attribute identifies the currently active element when
 </ul>
 ```
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # aria-describedby
 
 # aria-posinset & aria-setsize
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # aria-current
@@ -554,6 +607,8 @@ values: page, step, location, date, time, false, true
   <img src="/imgs/aria-current-date.png"  class="h-[160px] inline" />
   <img src="/imgs/aria-current-step.png"  class="h-[160px] inline" />
 </div>
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # aria-current code examples
@@ -582,6 +637,8 @@ values: page, step, location, date, time, false, true
   </ol>
 </nav>
 ```
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # aria-current vs. aria-selected
@@ -612,36 +669,66 @@ For example, when using Tabs, we should mark the currently selected tab with ari
 ```
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 # aria-posinset & aria-setsize
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # Devtools
 
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 
 # aria-live region + aria busy
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 # Table structure + a bit about our Table component
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 # Error (role=“alert” + aria-describedby)
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 # Label -> for or wrap
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 # useId react + id should be unique
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 # Whisper + trigger cant be div!
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 # role=“slider” example
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 # tabpanel + accordions
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 # Checkbox
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 # Radio
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 # Input
 ---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
 # Autocomplete
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # Dropdowns
@@ -650,6 +737,8 @@ https://adrianroselli.com/2020/03/stop-using-drop-down.html
 
 https://github.com/alphagov/accessible-autocomplete
 # Motion disabled
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
 # Useful links
