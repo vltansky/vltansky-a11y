@@ -138,9 +138,9 @@ https://www.tpgi.com/basic-screen-reader-commands-for-accessibility-testing/
 
 Arrow keys - navigate
 Tab key - jump to next focusable element (element should trigger smth, not just read)
-https://www.magentaa11y.com/demos/basic-accessible-webpage/
-https://www.magentaa11y.com/
-https://play.tailwindcss.com/K02GpXc3ts
+https://www.magentaa11y.com/demos/basic-accessible-webpage/<br/>
+https://www.magentaa11y.com/<br/>
+https://play.tailwindcss.com/K02GpXc3ts<br/>
 
 
 ---
