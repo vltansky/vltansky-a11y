@@ -34,10 +34,10 @@ css: unocss
 
 # Other abbreviation explanation
 
-- W3C - World Wide Web Consortium (1994)
-- WAI - Web Accessibility Initiative (1997) <br />
-  by W3C & The White House
-- WCAG - Web Content Accessibility Guidelines (December 2008)
+- W3C - World Wide Web Consortium
+- WAI - Web Accessibility Initiative <br />
+  W3C Accessibility Initiative (expanding scope of accessibility standards to more than just web content)
+- WCAG - Web Content Accessibility Guidelines
 - SR - Screen reader
 - AT - Assistive technology - Any item, piece of equipment, or product system that is used to increase, maintain, or improve functional capabilities of individuals with disabilities
 
@@ -55,15 +55,18 @@ https://uxdesign.cc/wcag-3-0-what-you-need-to-know-about-the-future-of-accessibi
 
 ---
 
+# WCAG 4 Principes
+
+---
+
 # WCAG Perceivable
 
 ## נתפס
 
-- Make all functionality available from a keyboard.
-- Give users enough time to read and use content.
-- Do not use content that causes seizures or physical reactions.
-- Help users navigate and find content.
-- Make it easier to use inputs other than keyboard.
+- Provide text alternatives for non-text content.
+- Provide captions and other alternatives for multimedia.
+- Create content that can be presented in different ways, including by assistive technologies, without losing meaning.
+- Make it easier for users to see and hear content.
 
 ---
 
@@ -79,9 +82,6 @@ https://uxdesign.cc/wcag-3-0-what-you-need-to-know-about-the-future-of-accessibi
 
 ---
 
-# WCAG 4 Principes
-
----
 
 # WCAG Understandable
 
@@ -125,11 +125,14 @@ https://www.tpgi.com/basic-screen-reader-commands-for-accessibility-testing/
 
 Arrow keys - navigate
 Tab key - jump to next focusable element (element should trigger smth, not just read)
+https://www.magentaa11y.com/demos/basic-accessible-webpage/
+https://www.magentaa11y.com/
+https://play.tailwindcss.com/K02GpXc3ts
 
 
 ---
 
-# Semantic HTML5 and layout wai aria
+# Semantic HTML5 and Aria
 <div class="text-center">
   <img src="/imgs/semantic-twit.jpg" class="inline h-[280px]" />
   <img src="/imgs/non-semantic.png" class="inline h-[280px]" />
@@ -137,27 +140,44 @@ Tab key - jump to next focusable element (element should trigger smth, not just 
 
 https://www.semrush.com/blog/semantic-html5-guide/
 
+The difference between semantic and non-semantic tags may not seem important to sighted users, but it matters considerably to blind users for many reasons. In this example, the
+tag informs the screen reader of a major set of navigation links. Semantic elements come with their own keyboard accessibility built-in, so no extra work is required on the user’s part.If you want to know which HTML element to use for each situation
+
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+
 ---
 
+# focus-visible
 
-# Focus
-
-### `:focus` & `:focus-visible`
-
-https://hidde.blog/focus-visible-more-than-keyboard/#:~:text=In%20other%20words%2C%20focus%20styles,to%20highlight%20it%20or%20not.
-
-### Focus trap
-
-https://appnest-demo.firebaseapp.com/focus-trap/
-
-## Styling focus
-
+https://play.tailwindcss.com/5ZdPdCvzXi <br/>
 https://tailwindcss.com/docs/hover-focus-and-other-states#hover-focus-and-active
 
+```html
+    <button type="button" class="
+      ... 
+      focus:outline-none 
+      focus:ring-2 
+      focus:ring-indigo-500 
+      focus:ring-offset-2
+    ">
+      Focus button
+    </button>
 
-### Autofocus
+    <button type="button" class="
+      ...
+      focus:outline-none
+      focus-visible:ring-2
+      focus-visible:ring-indigo-500
+      focus-visible:ring-offset-2
+    ">
+      Focus visible button
+    </button>
+```
 
+---
 
+# Focus trap
+https://a11y-solutions.stevenwoodson.com/solutions/focus/modals/
 
 ---
 
@@ -197,12 +217,33 @@ Always prefer `<button>` over divs, spans etc. Button by default handles space a
 <div 
   tabindex="0" 
   role="button" 
-  aria-pressed="false"
-  >
+  aria-pressed="false">
   Save
 </div>
 ```
 
+---
+
+# Link anti-pattern
+
+Anything that behaves like a link should use an `<a>` tag with an href, anything else should use a `<button>`
+
+```jsx{1-6|7|10-14}
+<button 
+  type="button" 
+  onClick={() => window.location.href="https://leumi.co.il"}>
+  button
+</button>
+
+<a href="http://google.com">link</a>
+
+<button 
+  role="link" 
+  type="button" 
+  onClick={() => window.location.href="https://leumi.co.il"}>
+  or at least use role="link" so SR will see it as a link
+</button>
+```
 ---
 
 # Navigation
@@ -230,12 +271,6 @@ or use aria:
 ## role=menu|menubar|menuitem are desktop menus
 https://adrianroselli.com/2017/10/dont-use-aria-menu-roles-for-site-nav.html
 
-
----
-
-# Dropdowns
-
-https://adrianroselli.com/2020/03/stop-using-drop-down.html
 
 ---
 
@@ -296,22 +331,288 @@ https://www.digitala11y.com/presentation-role/ (Example 4)
 ```css
 .sr-only {
   position: absolute;
-width: 1px;
-height: 1px;
-padding: 0;
-margin: -1px;
-overflow: hidden;
-clip: rect(0, 0, 0, 0);
-white-space: nowrap;
-border-width: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 ```
-
-* sr = screen reader
 
 https://tailwindcss.com/docs/screen-readers
 
 
+---
+
+# aria-label
+
+#### The aria-label should be used to provide a text alternative to an element that has no visible text on the screen
+
+```jsx{1|2|3-4|5-6|7-8}
+<button>send</button> // accessible name: send
+<button aria-label="send form">send</button> // accessible name: send form
+<button aria-label="send button">...<button>// ⛔ BAD: "send button, button"
+<button aria-label="send">...<button>// ✅ Good: "send, button"
+<nav aria-label="primary">...</nav>
+<nav aria-label="secondary">...</nav>
+<button aria-label="Send">Send</button>// ⛔ BAD: over-using aria-label
+<button>Send</button>// ✅ GOOD: use it only when needed it
+```
+<img src="/imgs/label-burger.png" class="h-[60px] my-3" /> 
+
+
+---
+
+# aria-label vs. title
+
+
+The title attribute shows as a tooltip when the mouse goes over the element. While it can be useful for people using the mouse, it will not be available to keyboard-only users. Note that while title attribute is listed in the text-alternative computation algorithm, it might not be supported in some combinations of screen-reader/browsers (at the time of writting, IE 11 and NVDA).
+
+In short, If you find yourself using the title attribute to provide additional information, it's probably better to either use aria-label or think of an alternative (e.g.: disclosure additional information to users such as a tooltip).
+
+```html
+<a href=".." title="Washington stimulates economic growth">Read more</a>
+<a href=".." title="Washington stimulates economic growth">
+  <span class="sr-only">Washington stimulates economic growth </span>Read more
+</a>
+```
+
+---
+
+# `<label>`
+
+```html
+<label for="firstname">First name:</label>
+<input type="text" name="firstname" id="firstname">
+
+<label>First name: <input type="text" name="firstname"></label>
+```
+
+### Get unique id in React
+
+```jsx
+import { useId } from 'react';
+
+function Example(){
+  const uniqueLabelId = useId();
+  return (<>
+    <label for={uniqueLabelId}>First name:</label>
+    <input type="text" name="firstname" id={uniqueLabelId}>
+  </>)
+}
+```
+
+---
+
+# aria-labelledby
+#### When label text is visible on screen, you should use aria-labelledby instead of aria-label.
+
+```html{1-3|6-8|13,15-16,19-20}
+// ⛔ BAD: using aria-label when text
+<nav aria-label="Related Content">
+  <h2>Related Content</h2>
+  <ul>..</ul>
+</nav>
+// ✅ Good: using aria-labelledby when text
+<nav aria-labelledby="nav-title">
+  <h2 id='nav-title'>Related Content</h2>
+  <ul>...</ul>
+</nav>
+
+<fieldset>
+  <legend id="shipping-id">Billing</legend>
+  <div>
+    <div id="first-name">First Name</div>
+    <input type="text" aria-labelledby="shipping-id first-name" />
+  </div>
+  <div>
+    <div id="last-name">Address</div>
+    <input type="text" aria-labelledby="shipping-id last-name" />
+  </div>
+</fieldset>
+```
+
+---
+
+# aria-labelledby & `<label>`
+
+This is much like using a label element, with some key differences
+
+- `aria-labelledby` may be used on any element, not just labelable elements
+- While a `label` element refers to the thing it labels, the relationship is reversed in the case of `aria-labelledby` — the thing being labeled refers to the thing that labels it
+- Only one label element may be associated with a labelable element, but `aria-labelledby` can take a list of IDREFs to compose a label from multiple elements. The label will be concatenated in the order that the IDREFs are given
+- You can use `aria-labelledby` to refer to elements that are hidden and would otherwise not be in the accessibility tree. For example, you could add a hidden `span` next to an element you want to label, and refer to that with `aria-labelledby`
+- However, since ARIA only affects the accessibility tree, `aria-labelledby` does not give you the familiar label-clicking behavior you get from using a `label` element  
+
+---
+
+# Relationships
+
+
+`aria-labelledby` is an example of a relationship attribute. A relationship attribute creates a semantic relationship between elements on the page regardless of their DOM relationship. In the case of `aria-labelledby`, that relationship is "this element is labelled by that element".
+
+The ARIA specification lists eight relationship attributes. Six of these, `aria-activedescendant`, `aria-controls`, `aria-describedby`, `aria-labelledby`, and `aria-owns`, take a reference to one or more elements to create a new link between elements on the page. The difference in each case is what that link means and how it is presented to users.
+
+---
+
+# aria-owns
+
+When a parent/child relationship is evident on-screen, but it isn’t represented in the DOM, the aria-owns attribute can be used to establish that relationship in the accessibility layer
+
+
+```html{1-9|5-9|2,6|11-21|13,17}
+<ul>
+  <li aria-owns="child">Fruit</li>
+  <li>Vegetables</li>
+</ul>
+
+<ul id="child">
+  <li>Apples</li>
+  <li>Bananas</li>
+</ul>
+
+<input 
+  aria-expanded="false" 
+  aria-owns="autcomplete_list" 
+  name="input-autocomplete" 
+  type="text">
+<ul 
+  id="autcomplete_list" 
+  role="listbox">
+  <li aria-selected="false" role="option" aria-posinset="1" aria-setsize="7">Belarus</li>
+  <li aria-selected="false" role="option" aria-posinset="2" aria-setsize="7">Belgium</li>
+</ul>
+```
+
+---
+
+# aria-controls
+
+The aria-controls attribute identifies the element (or elements) whose contents or presence are controlled by the element on which the attribute is set, regardless of what type of interaction initiates the impacted behavior
+
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tablist_role#keyboard_interactions
+
+```html{all|2-15|16-17|5,16|11,17}
+<div class="tab-interface">
+  <div role="tablist" aria-label="Sample Tabs">
+    <span role="tab" id="tab-1"
+      aria-selected="true"
+      aria-controls="panel-1"
+      tabindex="0">
+      First Tab
+    </span>
+    <span role="tab" id="tab-2"
+      aria-selected="false"
+      aria-controls="panel-2"
+      tabindex="-1">
+      Second Tab
+    </span>
+  </div>
+  <div id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">...</div>
+  <div id="panel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2" class="hidden">...</div>
+</div>
+```
+
+---
+
+# aria-activedescendant
+
+The aria-activedescendant attribute identifies the currently active element when focus is on a `composite` widget, `combobox`, `textbox`, `group`, or `application`.
+
+
+```html{all|5,11}
+<input 
+  aria-expanded="false" 
+  aria-owns="autcomplete_list" 
+  name="input-autocomplete" 
+  aria-activedescendant="belgium"
+  type="text">
+<ul 
+  id="autcomplete_list" 
+  role="listbox">
+  <li id="belarus" aria-selected="false" role="option" aria-posinset="1" aria-setsize="7">Belarus</li>
+  <li id="belgium" aria-selected="false" role="option" aria-posinset="2" aria-setsize="7">Belgium</li>
+</ul>
+```
+---
+
+# aria-describedby
+
+# aria-posinset & aria-setsize
+---
+
+# aria-current
+The aria-current attribute should be used to identify the current item in a set of items. Below we show some applications of this attribute to make websites more accessible to all users
+
+values: page, step, location, date, time, false, true
+<div class="text-center">
+  <img src="/imgs/aria-current-page-vo.png" class="h-[160px] inline" />
+  <img src="/imgs/aria-current-location-vo.png"  class="h-[160px] inline" />
+  <img src="/imgs/aria-current-date.png"  class="h-[160px] inline" />
+  <img src="/imgs/aria-current-step.png"  class="h-[160px] inline" />
+</div>
+---
+
+# aria-current code examples
+
+```html{all|16}
+<nav aria-label="breadcrumbs">
+  <ol>
+    <li>
+      <a href="/">
+        Home
+      </a>
+    </li>
+    <li>
+      <a href="/parent">
+        Parent
+      </a>
+    </li>
+    <li>
+      <a
+        href="/parent/current"
+        aria-current="location"
+      >
+        Current
+      </a>
+    </li>
+  </ol>
+</nav>
+```
+---
+
+# aria-current vs. aria-selected
+
+In widgets where aria-selected has the same meaning as aria-current, we should use aria-selected instead.
+
+For example, when using Tabs, we should mark the currently selected tab with aria-selected="true. This has the same meaning as aria-current="page", but aria-selected="true" is preferred.
+
+```html{all|2}
+ <div role="tablist" aria-label="Entertainment">
+  <button id="tab-1-button" role="tab" aria-controls="tab-1" aria-selected="true">
+    Tab 1
+  </button>
+  <button id="tab-2-button" role="tab" aria-controls="tab-2">
+    Tab 2
+  </button>
+</div>
+
+<div id="tab-1" 
+    role="tabpanel"
+    tabindex="0" 
+    aria-labelledby="tab-1-button"
+>...</div>
+<div id="tab-2" role="tabpanel"
+    tabindex="0" 
+    aria-labelledby="tab-2-button"
+    hidden>...</div>
+```
+
+---
+# aria-posinset & aria-setsize
 ---
 
 # Devtools
@@ -342,6 +643,10 @@ https://tailwindcss.com/docs/screen-readers
 ---
 # Autocomplete
 ---
+
+# Dropdowns
+
+https://adrianroselli.com/2020/03/stop-using-drop-down.html
 
 https://github.com/alphagov/accessible-autocomplete
 # Motion disabled
