@@ -592,6 +592,28 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 
 # aria-describedby
 
+```html{1-4|1-2|5-8|7,8|9-17|13,16}
+<button aria-describedby="trash-desc">Move to trash</button>
+<p id="trash-desc">
+  Items in the trash will be permanently removed after 30 days.
+</p>
+
+<label for="fname">First name</label>
+<input name="fname" type="text" id="fname" aria-describedby="hint">
+<p id="hint">A bit of instructions for this field linked with aria-describedby. </p>
+
+<input type="text" id="first" name="first"
+      onmouseover="tooltipShow()"
+      onfocus="tooltipShow()"
+      aria-describedby="hint-tooltip"
+      aria-required="false"/>
+
+<div id="hint-tooltip" role="tooltip" aria-hidden="true">Your first name is optional. </div>
+```
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+
 # aria-posinset & aria-setsize
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
@@ -687,10 +709,6 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 # Table structure + a bit about our Table component
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
-# Error (role=“alert” + aria-describedby)
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
