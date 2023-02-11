@@ -40,6 +40,10 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 - SR - Screen reader
 - AT - Assistive technology - Any item, piece of equipment, or product system that is used to increase, maintain, or improve functional capabilities of individuals with disabilities
 
+<!--
+* i18n,l10n
+* AGWG has decided WCAG no longer stands for “Web Content Accessibility Guidelines”. It now stands for “	”. This change reflects the expanding scope of accessibility standards to more than just web content
+-->
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -53,6 +57,19 @@ https://www.w3.org/TR/WCAG22 <br/>
 https://www.w3c.org.il/guidelines_wcag_2-0 <br/>
 https://uxdesign.cc/wcag-3-0-what-you-need-to-know-about-the-future-of-accessibility-standards-2e1f6374f2c7
 
+<!--
+* founded 1995
+* WCAG 2.0, were published in December 2008
+
+
+WCAG 3.0 isn’t supposed to finalize until 2023. Don’t be surprised if it gets pushed to an even later date, though.
+
+WCAG 2.2 is at the Candidate Recommendation stage of the process, and we expect it to be finalized in early 2023. won’t change much.
+
+WCAG 3.0 will not be backwards compatible with the WCAG 2 Series; but the 2 Series will not be deprecated by the 3 Series. Both will be parallel standards.
+
+Once WCAG 3.0 is finalized AGWG plans on having more frequent updates. They have adopted an Agile approach to the standards. AGWG recognizes it’s far more difficult to future-proof the standards, especially with scope of the content going beyond the web.
+-->
 
 ---
 layout: center
@@ -72,6 +89,13 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 - Provide captions and other alternatives for multimedia.
 - Create content that can be presented in different ways, including by assistive technologies, without losing meaning.
 - Make it easier for users to see and hear content.
+<!--
+* 1 נתפס
+    * 1.1 יש לספק חלופות טקסטואליות עבור תכנים לא טקסטואליים, כך שניתן יהיה להמירם לצורות אחרות להן זקוקים אנשים, כמו אותיות גדולות, ברייל, דיבור, סמלים או שפה פשוטה יותר.
+    * 1.2 יש לספק חלופות עבור מדיה מבוססת-זמן.
+    * 1.3 יש לבנות תכנים הניתנים להצגה בדרכים שונות (למשל outline פשוט יותר) ללא איבוד מידע או מבנה.
+    * 1.4 יש להקל על המשתמשים לראות ולשמוע תכנים לרבות הפרדת חזית מרקע.
+-->
 
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
@@ -86,6 +110,13 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 - Do not use content that causes seizures or physical reactions.
 - Help users navigate and find content.
 - Make it easier to use inputs other than keyboard.
+<!--    
+* 2 ניתן להפעלה
+    * 2.1 יש לאפשר תפקוד מלא באמצעות מקלדת.
+    * 2.2 יש לתת למשתמשים מספיק זמן לקרוא ולהשתמש בתכנים.
+    * 2.3 אין לעצב תכנים באופן הידוע כגורם להתקפים.
+    * 2.4 יש לספק דרכים כדי לעזור למשתמשים לנווט, לאתר תכנים, ולקבוע את מקום הימצאם.
+-->
 
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
@@ -99,6 +130,12 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 - Make text readable and understandable.
 - Make content appear and operate in predictable ways.
 - Help users avoid and correct mistakes.
+<!--    
+* 3 ניתן להבנה
+    * 3.1 יש ליצור תכני טקסט קריאים וניתנים להבנה.
+    * 3.2 יש לגרום לדפי רשת להופיע ולתפקד באופן הניתן לניבוי.
+    * 3.3 יש לסייע למשתמשים להימנע משגיאות ולתקנן.
+-->
 
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
@@ -109,6 +146,10 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 ## יציב
 
 - Maximize compatibility with current and future user tools.
+<!--   
+* 4 יציב
+    * 4.1 יש לדאוג לתאימות מירבית עם סוכני משתמש קימים ועתידיים, כולל טכנולוגיות תומכות.
+-->
 
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
@@ -142,6 +183,12 @@ https://www.magentaa11y.com/demos/basic-accessible-webpage/<br/>
 https://www.magentaa11y.com/<br/>
 https://play.tailwindcss.com/K02GpXc3ts<br/>
 
+<!--   
+Run voice over on demo website & leumi
+Dom order focus
+Tab key bad example - welcome text (accounts combo)
+-->
+
 
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
@@ -158,6 +205,10 @@ https://www.semrush.com/blog/semantic-html5-guide/
 The difference between semantic and non-semantic tags may not seem important to sighted users, but it matters considerably to blind users for many reasons. In this example, the
 tag informs the screen reader of a major set of navigation links. Semantic elements come with their own keyboard accessibility built-in, so no extra work is required on the user’s part.If you want to know which HTML element to use for each situation. [List of all elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
 
+<!--
+* seo benefits
+* we will see later how ul, ol and other tags are helping us and we will prefer them most of the times
+-->
 
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
@@ -207,6 +258,13 @@ https://tailwindcss.com/docs/hover-focus-and-other-states#hover-focus-and-active
       Focus visible button
     </button>
 ```
+<!--
+* styling focus, outline - is important
+* hover styles for focus but not always
+* we are responsible to make sure focus is styled, designers miss it most of time
+* focus-within
+* devtools + states e.g active
+-->
 
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
@@ -239,7 +297,10 @@ tabindex = 0 | -1 | 1,2,3...
 </div>
 ```
 * `onKeyPress` deprecated -  use `onKeyDown`,
-
+<!--
+* tabindex not removing element from sr, but only removes focusability
+* eslint jsx-a11y plugin https://github.com/jsx-eslint/eslint-plugin-jsx-a11y
+-->
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -262,6 +323,9 @@ Always prefer `<button>` over divs, spans etc. Button by default handles space a
   Toggle
 </div>
 ```
+<!--
+aria-disabled can be useful for styling, as works different from disabled
+-->
 
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
@@ -318,6 +382,11 @@ or use aria:
 ## role=menu|menubar|menuitem are desktop menus
 https://adrianroselli.com/2017/10/dont-use-aria-menu-roles-for-site-nav.html
 
+<!--
+* Without ul & li it wont be list
+* Maybe open digital asakim old version 4 - show nav without ul
+* Explain what is menubar
+-->
 
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
@@ -375,6 +444,11 @@ In all three scenarios, the attribute is unnecessary to add because the element 
 Using aria-hidden="false" will not re-expose the element to assistive technology if any of its parents specify aria-hidden="true".
 
 https://www.digitala11y.com/presentation-role/ (Example 4)
+
+<!--
+The role “none” was added to act as an alias for role=”presentation”, and both are the same and perform the same action. This was meant to provide clarity for those who were confused by the word “presentation.”
+-->
+
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -418,6 +492,9 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 ```
 <img src="/imgs/label-burger.png" class="h-[60px] my-3" /> 
 
+<!--
+If an element has both aria-labelledby and aria-label, the value of aria-labelledby will be used in the text alternative computation.
+-->
 
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
@@ -924,11 +1001,10 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
     <div role="option" tabindex="0" data-index="4" class="a11y-suggestion">Eating cupcakes</div>
 </div>
 </div>
-    ```
-https://adrianroselli.com/2020/03/stop-using-drop-down.html
+```
 https://www.magentaa11y.com/checklist-web/select/
-
 https://github.com/alphagov/accessible-autocomplete
+
 # Motion disabled
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
