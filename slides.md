@@ -50,7 +50,7 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 
 # WCAG
 
-WCAG 2.0 guidelines are categorized into three levels of conformance: A (lowest), AA (mid range), and AAA (highest).
+WCAG 2.0 guidelines are categorized into three levels: A (lowest), AA (mid range), and AAA (highest).
 
 https://en.wikipedia.org/wiki/Web_Content_Accessibility_Guidelines#Version_2 <br/>
 https://www.w3.org/TR/WCAG22 <br/>
@@ -70,6 +70,19 @@ WCAG 3.0 will not be backwards compatible with the WCAG 2 Series; but the 2 Seri
 
 Once WCAG 3.0 is finalized AGWG plans on having more frequent updates. They have adopted an Agile approach to the standards. AGWG recognizes it’s far more difficult to future-proof the standards, especially with scope of the content going beyond the web.
 -->
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+
+# WCAG in law
+
+By Law: https://www.w3.org/WAI/policies/
+
+The Israeli accessibility regulations were amended in 2017 to require web accessibility in all services provided over the internet. Both private and public entities providing services online are required to apply Internet Accessibility Standard (Israel Standard 5668), which has adopted WCAG 2.0. The regulations apply to both websites, at AA level, and to applications and to digital documents uploaded after Oct 2017. Personal information – such as bank client’s statements – is to be made accessibly by 2022. Accessible websites and apps are required to include an accessibility statement.
+<br/><br/>
+Captions are required for time-based media (Level A) uploaded after 2017. However, only public authorities and large-scale private businesses have to provide them. In addition, lectures, conferences and similar events presented online, may offer a text document as alternative to online accommodations. Services provided or promoted through social media are required to use the accessibility features offered by the platforms. Websites which host third-party content have to provide accessibility options, such as alt text descriptions for images.
+
 
 ---
 layout: center
@@ -155,18 +168,6 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
-# WCAG in law
-
-By Law: https://www.w3.org/WAI/policies/
-
-The Israeli accessibility regulations were amended in 2017 to require web accessibility in all services provided over the internet. Both private and public entities providing services online are required to apply Internet Accessibility Standard (Israel Standard 5668), which has adopted WCAG 2.0. The regulations apply to both websites, at AA level, and to applications and to digital documents uploaded after Oct 2017. Personal information – such as bank client’s statements – is to be made accessibly by 2022. Accessible websites and apps are required to include an accessibility statement.
-<br/><br/>
-Captions are required for time-based media (Level A) uploaded after 2017. However, only public authorities and large-scale private businesses have to provide them. In addition, lectures, conferences and similar events presented online, may offer a text document as alternative to online accommodations. Services provided or promoted through social media are required to use the accessibility features offered by the platforms. Websites which host third-party content have to provide accessibility options, such as alt text descriptions for images.
-
----
-class: "bg-[url(/imgs/bg.png)] bg-cover"
----
-
 # How to use A11y software
 
 Softwares:
@@ -174,6 +175,7 @@ Softwares:
 - Jaws
 - NVDA
 - VoiceOver [keys](https://help.apple.com/voiceover/command-charts/)
+VO - VoiceOver modifier - default: control
 
 https://www.tpgi.com/basic-screen-reader-commands-for-accessibility-testing/
 
@@ -181,10 +183,13 @@ Arrow keys - navigate
 Tab key - jump to next focusable element (element should trigger smth, not just read)
 https://www.magentaa11y.com/demos/basic-accessible-webpage/<br/>
 https://www.magentaa11y.com/<br/>
+https://www.w3.org/WAI/ARIA/apg/patterns/combobox/ <br/>
 https://play.tailwindcss.com/K02GpXc3ts<br/>
 
 <!--   
+Rad keys for voiceover
 Run voice over on demo website & leumi
+Run voice on Radio, Checkboxes, combobox, Table
 Dom order focus
 Tab key bad example - welcome text (accounts combo)
 -->
@@ -200,16 +205,28 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
   <img src="/imgs/non-semantic.png" class="inline h-[280px]" />
 </div>
 
-https://www.semrush.com/blog/semantic-html5-guide/
-
-The difference between semantic and non-semantic tags may not seem important to sighted users, but it matters considerably to blind users for many reasons. In this example, the
-tag informs the screen reader of a major set of navigation links. Semantic elements come with their own keyboard accessibility built-in, so no extra work is required on the user’s part.If you want to know which HTML element to use for each situation. [List of all elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
+https://www.semrush.com/blog/semantic-html5-guide/ <br/>
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element
 
 <!--
+* aria attributes created to complete gaps, always prefer semantic html.
+* semantic elements come with their own keyboard accessibility built-in, so no extra work is required on the user’s part.If you want to know which HTML element to use for each situation. Example: button
+* we will see later how ul, ol and other tags are helping us
 * seo benefits
-* we will see later how ul, ol and other tags are helping us and we will prefer them most of the times
 -->
 
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+
+# Headings
+
+ - All pages should at least have a `<h1>` level heading giving the title of the page
+ - Do not skip heading levels to be more specific (for example, do not skip from `<h2>` to `<h5>`)
+ - Do not select heading levels based on their appearance
+ - Do not use bold instead of a heading
+ - Remember that SR users navigate with headings
+ 
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -323,6 +340,8 @@ Always prefer `<button>` over divs, spans etc. Button by default handles space a
   Toggle
 </div>
 ```
+
+Aria disabled vs disabled : https://play.tailwindcss.com/VobRHd0Tf0
 <!--
 aria-disabled can be useful for styling, as works different from disabled
 -->
@@ -335,7 +354,7 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 
 Anything that behaves like a link should use an `<a>` tag with an href, anything else should use a `<button>`
 
-```jsx{1-6|7|10-14}
+```jsx{1-6|7|9-14}
 <button 
   type="button" 
   onClick={() => window.location.href="https://leumi.co.il"}>
@@ -351,6 +370,8 @@ Anything that behaves like a link should use an `<a>` tag with an href, anything
   or at least use role="link" so SR will see it as a link
 </button>
 ```
+
+[Don’t use javascript in href](https://www.magentaa11y.com/checklist-web/link/#:~:text=Don%E2%80%99t%20use%20javascript%20in%20href)
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -368,9 +389,9 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
       […]
    </ul>
 </nav>
-
-https://www.aditus.io/patterns/multiple-navigation-landmarks/
 ```
+https://www.magentaa11y.com/checklist-web/breadcrumbs/ <br/>
+https://www.aditus.io/patterns/multiple-navigation-landmarks/
 
 or use aria:
 ```html
@@ -428,22 +449,24 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 
 # Hiding elements
 
-- `aria-hidden="true"`
-- `role="presentation"` same as `role="none"`
+- `aria-hidden="true"` - remove the entire element from the accessibility API
+- `role="presentation"` same as `role="none"` - will remove the semantic meaning of an element while still exposing it and its content to assistive technology
+- `[hidden]`, `display: none` or `visibility: hidden` - same as `aria-hidden="true"`.
+- `aria-hidden="false"` will not re-expose the element to assistive technology if any of its parents specify `aria-hidden="true"`.
 
-seem similar, but the intent behind each is different.
+```html
+<ul role="presentation">
+  <li>
+    <a href="http://leumi.co.il">Why</a>
+  </li>
+  <li>
+    <a href="http://leumi.co.il">Ofer</a>
+  </li>
+</ul>
+```
 
-aria-hidden="true" will remove the entire element from the accessibility API.
-role="presentation" and role="none" will remove the semantic meaning of an element while still exposing it and its content to assistive technology.
-
-The HTML hidden attribute is present
-The element or the element's ancestor is hidden with display: none
-The element or the element's ancestor is hidden with visibility: hidden
-In all three scenarios, the attribute is unnecessary to add because the element has already been removed from the accessibility tree. Visually hiding elements with display or visibility hides content from the screen and from assistive technologies.
-
-Using aria-hidden="false" will not re-expose the element to assistive technology if any of its parents specify aria-hidden="true".
-
-https://www.digitala11y.com/presentation-role/ (Example 4)
+https://play.tailwindcss.com/9QpDXYkX8H <br/>
+https://www.digitala11y.com/presentation-role/ 
 
 <!--
 The role “none” was added to act as an alias for role=”presentation”, and both are the same and perform the same action. This was meant to provide clarity for those who were confused by the word “presentation.”
@@ -469,6 +492,19 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 }
 ```
 
+```html{1-3|4-9}
+<a href="http://example.com">
+  <span class="sr-only">Title of post</span> Read More <i class="fas fa-chevron-right" aria-hidden="true"></i>
+</a>
+
+<label>
+  <input type="checkbox" class="sr-only" />
+  <div class="checkbox_visual" />
+  <span>Basic checkbox</span>
+</label>
+
+```
+
 https://tailwindcss.com/docs/screen-readers
 
 
@@ -482,7 +518,7 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 
 ```jsx{1|2|3-4|5-6|7-8}
 <button>send</button> // accessible name: send
-<button aria-label="send form">send</button> // accessible name: send form
+<button aria-label="some other text">send</button> // accessible name: some other text
 <button aria-label="send button">...<button>// ⛔ BAD: "send button, button"
 <button aria-label="send">...<button>// ✅ Good: "send, button"
 <nav aria-label="primary">...</nav>
@@ -491,6 +527,8 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 <button>Send</button>// ✅ GOOD: use it only when needed it
 ```
 <img src="/imgs/label-burger.png" class="h-[60px] my-3" /> 
+
+https://www.aditus.io/aria/aria-label/#examples
 
 <!--
 If an element has both aria-labelledby and aria-label, the value of aria-labelledby will be used in the text alternative computation.
@@ -514,6 +552,8 @@ In short, If you find yourself using the title attribute to provide additional i
 </a>
 ```
 
+https://play.tailwindcss.com/el5EIJBAYr
+
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -526,6 +566,8 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 
 <label>First name: <input type="text" name="firstname"></label>
 ```
+https://play.tailwindcss.com/L8evafTT7D
+<br/><br/>
 
 ### Get unique id in React
 
@@ -606,18 +648,17 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 
 When a parent/child relationship is evident on-screen, but it isn’t represented in the DOM, the aria-owns attribute can be used to establish that relationship in the accessibility layer
 
+https://play.tailwindcss.com/TCxrZXT9yg
 
-```html{1-9|5-9|2,6|11-21|13,17}
+```html{1-8|5-8|2,5|9-21|11,15}
 <ul>
   <li aria-owns="child">Fruit</li>
   <li>Vegetables</li>
 </ul>
-
 <ul id="child">
   <li>Apples</li>
   <li>Bananas</li>
 </ul>
-
 <input 
   aria-expanded="false" 
   aria-owns="autcomplete_list" 
@@ -669,7 +710,7 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 # aria-activedescendant
 
 The aria-activedescendant attribute identifies the currently active element when focus is on a `composite` widget, `combobox`, `textbox`, `group`, or `application`.
-
+https://play.tailwindcss.com/TYH3ON3r0L
 
 ```html{all|5,11}
 <input 
@@ -681,10 +722,40 @@ The aria-activedescendant attribute identifies the currently active element when
 <ul 
   id="autcomplete_list" 
   role="listbox">
-  <li id="belarus" aria-selected="false" role="option" aria-posinset="1" aria-setsize="7">Belarus</li>
-  <li id="belgium" aria-selected="false" role="option" aria-posinset="2" aria-setsize="7">Belgium</li>
+  <li id="belarus" aria-selected="false" role="option">Belarus</li>
+  <li id="belgium" aria-selected="false" role="option">Belgium</li>
 </ul>
 ```
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+
+# aria-setsize & aria-posinset
+
+The aria-setsize attribute defines the number of items in the current set of listitems or treeitems when not all items in the set are present in the DOM
+
+The aria-posinset attribute defines an element's number or position in the current set of listitems or treeitems when not all items are present in the DOM
+
+https://play.tailwindcss.com/c19yhBeXwv
+
+```html
+<input 
+  aria-expanded="false" 
+  aria-owns="autcomplete_list" 
+  name="input-autocomplete" 
+  aria-activedescendant="kyiv"
+  type="text">
+<ul 
+  id="autcomplete_list" 
+  role="listbox">
+  <li id="belarus" aria-selected="false" role="option" aria-posinset="4" aria-setsize="7">Belarus</li>
+  <li id="belgium" aria-selected="false" role="option" aria-posinset="2" aria-setsize="7">Belgium</li>
+  <li id="london" aria-selected="false" role="option" aria-posinset="1" aria-setsize="7">London</li>
+  <li id="kyiv" aria-selected="false" role="option" aria-posinset="7" aria-setsize="7">kyiv</li>
+</ul>
+```
+
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -709,6 +780,7 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 
 <div id="hint-tooltip" role="tooltip" aria-hidden="true">Your first name is optional. </div>
 ```
+
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -847,8 +919,8 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 Dynamic content which updates without a page reload is generally either a region or a widget. Simple content changes which are not interactive should be marked as live regions. A live region is explicitly denoted using the aria-live attribute.
 
 
-aria-live="assertive" == role="alert"
-most of the time we will use aria-live="polite". The screen reader will speak changes whenever the user is idle
+polite = wait for user idle<br/>
+assertive = role="alert" = urgent <br/>
 
 https://bitsofco.de/using-aria-live/
 https://codepen.io/joe-watkins/pen/NWOxov
@@ -990,19 +1062,19 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 
 ```html
 <div class="a11y-container">
-  <p id="a11y-usage-select-element-js" class="sr-only">Utilisez la tabulation (ou les touches flèches) pour naviguer dans la liste des suggestions</p>
-  <label for="a11y-select-element-js" class="sr-only">Rechercher dans la liste</label>
-  <input type="text" id="a11y-select-element-js" aria-describedby="a11y-usage-select-element-js">
+  <p id="a11y-usage-select" class="sr-only">Utilisez la tabulation (ou les touches flèches) pour naviguer dans la liste des suggestions</p>
+  <label for="a11y-select" class="sr-only">Rechercher dans la liste</label>
+  <input type="text" id="a11y-select" aria-describedby="a11y-usage-select">
   <div id="a11y-select-element-suggestions" role="listbox" aria-multiselectable="true">
-    <div role="option" tabindex="0" data-index="0" class="a11y-suggestion">Sleeping</div>
-    <div role="option" tabindex="0" data-index="1" class="a11y-suggestion" aria-selected="true">Climbing trees</div>
-    <div role="option" tabindex="0" data-index="2" class="a11y-suggestion">Knitting socks</div>
-    <div role="option" tabindex="0" data-index="3" class="a11y-suggestion" aria-selected="true">Riding bikes</div>
-    <div role="option" tabindex="0" data-index="4" class="a11y-suggestion">Eating cupcakes</div>
+    <div role="option" tabindex="0">Sleeping</div>
+    <div role="option" tabindex="0" aria-selected="true">Climbing trees</div>
+    <div role="option" tabindex="0">Knitting socks</div>
+    <div role="option" tabindex="0" aria-selected="true">Riding bikes</div>
+    <div role="option" tabindex="0">Eating cupcakes</div>
 </div>
 </div>
 ```
-https://www.magentaa11y.com/checklist-web/select/
+https://www.magentaa11y.com/checklist-web/select/ <br/>
 https://github.com/alphagov/accessible-autocomplete
 
 
@@ -1126,6 +1198,10 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 
 https://youtu.be/-7ENwVFOh_I
 
+<!--
+TOOD: Tailwindcss example
+-->
+
 ---
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
@@ -1142,6 +1218,41 @@ class: "bg-[url(/imgs/bg.png)] bg-cover"
 class: "bg-[url(/imgs/bg.png)] bg-cover"
 ---
 
+# A lot more to explore ...
+
+|                      |                       |                       |                   |
+|----------------------|-----------------------|-----------------------|-------------------|
+| aria-autocomplete    | aria-checked          | aria-disabled         | aria-errormessage |
+| aria-multiselectable | aria-orientation      | aria-placeholder      | aria-pressed      |
+| aria-readonly        | aria-required         | aria-selected         | aria-sort         |
+| aria-valuemax        | aria-valuemin         | aria-valuenow         | aria-valuetext    |
+| aria-busy            | aria-live             | aria-relevant         | aria-atomic       |
+| aria-dropeffect      | aria-grabbed          | aria-activedescendant | aria-colcount     |
+| aria-colindex        | aria-colspan          | aria-controls         | aria-describedby  |
+| aria-description     | aria-details          | aria-errormessage     | aria-flowto       |
+| aria-labelledby      | aria-owns             | aria-posinset         | aria-rowcount     |
+| aria-rowindex        | aria-rowspan          | aria-setsize          | aria-atomic       |
+| aria-busy            | aria-controls         | aria-current          | aria-describedby  |
+| aria-description     | aria-details          | aria-disabled         | aria-dropeffect   |
+| aria-errormessage    | aria-flowto           | aria-grabbed          | aria-haspopup     |
+
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+layout: 'center'
+---
+
+# A lot more  ...
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes
+
+
+---
+class: "bg-[url(/imgs/bg.png)] bg-cover"
+---
+
 # Useful links
 
-https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/
+- https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/
+- https://mui.com/
+- https://ant.design/
+- https://react-spectrum.adobe.com/react-aria/
